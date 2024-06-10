@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: Because this algorithm takes 5.070s for reveresd list and 0.549s for sorted list
+
+sort2 uses: Merge Sort
+
+How do you know?: Because this algorithm takes 0.580s for reveresd list and 0.526s for sorted list
+
+sort3 uses: Selection Sort
+
+How do you know?: Because this algorithm takes 2.528s for reveresd list and 2.251s for sorted list
