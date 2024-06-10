@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <div id = "table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sheet in data %}
+                    <tr>
+                        <td>{{sheet["Symbol"]}}</td>
+                        <td>{{sheet["Price"]}}</td>
+                        <td>{{sheet["Symbol"]}}</td>
+                        <td>{{sheet["Shares"]}}</td>
+                        <td>{{sheet["Total"]}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p style = "font-weight: bold;text-align:right;margin-right:200px">Cash: {{cash}}</p>
+    </div>
+
+{% endblock %}

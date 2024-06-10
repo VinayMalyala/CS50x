@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <div id = "table">
+        <table>
+            <thead>
+                <tr>
+                    <th>State</th>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sheet in transaction %}
+                    <tr>
+                        <td>{{sheet[0]}}</td>
+                        <td>{{sheet[1]}}</td>
+                        <td>{{sheet[2]}}</td>
+                        <td>{{sheet[3]}}</td>
+                        <td>{{sheet[4]}}</td>
+                        <td>{{sheet[5]}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

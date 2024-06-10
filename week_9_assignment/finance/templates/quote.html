@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Symbol" type="text">
+        </div>
+        <div class="mb-3">
+            <button type="submit">Search</button>
+        </div>
+
+    </form>
+    <div id = "table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Symbol</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for sheet in history_search %}
+                    <tr>
+                        <td>{{sheet[0]}}</td>
+                        <td>{{sheet[2]}}</td>
+                        <td>{{sheet[1]}}</td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+
+        </table>
+        <form action ='/deqoute' method='post'>
+            <input type = 'hidden' name = 'delete_history' value = "{{sheet}}" >
+            <button>Delete history</button>
+        </form>
+    </div>
+
+{% endblock %}
+<script>
+    function ajax_request() {
+        var symbol = $("#symbol").val();  // Lấy giá trị mà người dùng đã nhập
+
+        // Tạo một đối tượng XMLHttpRequest mới
+        var aj = new XMLHttpRequest();
+
+        // Xử lý sự kiện thay đổi trạng thái
+        aj.onreadystatechange = function () {
+            if (aj.readyState == 4 && aj.status == 200) {
+                $("#table").html(aj.responseText);  // Cập nhật nội dung của div có id "table" với phản hồi
+            }
+        }
+
+        // Mở một yêu cầu POST không đồng bộ đến điểm cuối "/quote"
+        aj.open("POST", "/quote", true);
+
+        // Đặt tiêu đề Content-Type cho yêu cầu POST
+        aj.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Gửi yêu cầu với biểu tượng làm dữ liệu
+        aj.send("symbol=" + encodeURIComponent(symbol));
+    }
+
+    // Gắn một trình lắng sự kiện cho trường đầu vào để kích hoạt yêu cầu AJAX khi nhập
+    $("#symbol").on("input", function () {
+        // ajax_request(); // Đã bỏ qua để tránh gửi liên tục khi người dùng nhập
+    });
+
+    // Gắn một trình lắng sự kiện cho sự kiện keypress trên trường đầu vào
+    $("#symbol").on("keypress", function (event) {
+        // Kiểm tra xem phím nhấn là Enter (mã ASCII: 13)
+        if (event.which === 13) {
+            ajax_request();  // Nếu là Enter, gửi yêu cầu AJAX
+        }
+    });
+
+    // Gọi hàm ajax_request khi trang được tải
+    // ajax_request(); // Đã bỏ qua để tránh gửi yêu cầu mặc định khi trang được tải
+</script>
