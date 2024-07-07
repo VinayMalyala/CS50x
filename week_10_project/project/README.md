@@ -1,5 +1,5 @@
 # CUSTOM CALCULATOR
-#### Video Demo:  <https://youtu.be/4jj0eRqFCwA?feature=shared>
+
 #### Description:
 This is the CS50x final project.It is called 'Custom Calculator' used to perform some basic mathematical operations.
 
